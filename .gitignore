@@ -1,0 +1,7 @@
+/.idea
+/.git
+/upload/tmp
+/bitrix/cache
+/bitrix/managed_cache
+/bitrix/*
+/*.log
