@@ -113,12 +113,16 @@ else
 		$componentPage = "section";
 	elseif(isset($arVariables["SECTION_CODE"]) && strlen($arVariables["SECTION_CODE"]) > 0)
 		$componentPage = "section";
+	elseif (isset($arVariables["PARAM1"]))
+		$componentPage = "exampage";
 	else
 		$componentPage = "sections_top";
 
 	$arResult = array(
 		"FOLDER" => "",
 		"URL_TEMPLATES" => Array(
+			"exampage" => htmlspecialcharsbx($APPLICATION->GetCurPage())."?".$arVariableAliases["PARAM1"]."=#PARAM1#"
+			              ."&".$arVariableAliases["PARAM2"]."=#PARAM2#",
 			"section" => htmlspecialcharsbx($APPLICATION->GetCurPage())."?".$arVariableAliases["SECTION_ID"]."=#SECTION_ID#",
 			"detail" => htmlspecialcharsbx($APPLICATION->GetCurPage())."?".$arVariableAliases["SECTION_ID"]."=#SECTION_ID#"."&".$arVariableAliases["ELEMENT_ID"]."=#ELEMENT_ID#",
 		),
