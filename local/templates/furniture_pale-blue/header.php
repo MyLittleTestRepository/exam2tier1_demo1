@@ -137,6 +137,7 @@ $APPLICATION->IncludeComponent("bitrix:search.form", "flat", Array(
 ?>
 					</div>
 				</div>
+                <?$APPLICATION->ShowViewContent('minimax')?>
 
 				<div class="information-block">
 					<div class="top"></div>

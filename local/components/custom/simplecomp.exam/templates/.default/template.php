@@ -16,6 +16,14 @@ use Bitrix\Main\Localization\Loc;
 if (empty($arResult))
     return;
 
+//min and max prices
+$this->SetViewTarget('minimax');
+echo '<div style="color:red; margin: 34px 15px 35px 15px">';
+echo 'Максимальная цена: '.$arResult['MAX'].'</br>';
+echo 'Минимальная цена: '.$arResult['MIN'];
+echo '</div>';
+$this->EndViewTarget();
+
 echo '<b>'.Loc::getMessage("CATALOG").'</b></br>';
 echo '<ul>';
 

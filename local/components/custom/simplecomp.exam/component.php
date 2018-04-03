@@ -77,7 +77,9 @@ if ($this->startResultCache())
 
 	$Res = CIBlockElement::GetList(false, $arFilter, false, false, $arSelectFields);
 
-	$arResult['COUNT']=0;
+	$arResult['COUNT'] = 0;
+	$arResult['MAX'] = 0;
+	$arResult['MIN'] = NULL;
 	while ($item = $Res->Fetch())
 	{
 		switch ($item['IBLOCK_ID'])
@@ -90,10 +92,16 @@ if ($this->startResultCache())
 			case $arParams['CAT_IB_ID']:
 				$cat =& $arResult['PRODUCTS'][intval($item['IBLOCK_SECTION_ID'])][intval($item['ID'])];
 				$cat['NAME'] = $item['NAME'];
-				$cat['PROPERTY_PRICE_VALUE'] = $item['PROPERTY_PRICE_VALUE'];
+				$cat['PROPERTY_PRICE_VALUE'] = intval($item['PROPERTY_PRICE_VALUE']);
 				$cat['PROPERTY_MATERIAL_VALUE'] = $item['PROPERTY_MATERIAL_VALUE'];
 				$cat['PROPERTY_ARTNUMBER_VALUE'] = $item['PROPERTY_ARTNUMBER_VALUE'];
+
+				if ($arResult['MIN']===NULL)
+					$arResult['MIN']=$cat['PROPERTY_PRICE_VALUE'];
+
 				$arResult['COUNT']++;
+				$arResult['MAX'] = max($arResult['MAX'], $cat['PROPERTY_PRICE_VALUE']);
+				$arResult['MIN'] = min($arResult['MAX'], $cat['PROPERTY_PRICE_VALUE']);
 				break;
 			default:
 				continue;
